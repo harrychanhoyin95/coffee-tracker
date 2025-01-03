@@ -1,6 +1,4 @@
-# coffee-tracker
-
-Coffee Tracker
+# Coffee Tracker
 A web application for tracking your coffee experiences. Log your coffee drinks, rate beans, and share your favorite coffee spots.
 Features
 
