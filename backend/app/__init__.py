@@ -12,25 +12,11 @@ async def create_app():
   app = Sanic("CoffeeTrackerAPI")
   app.ctx = SimpleNamespace()
 
-  @app.before_server_start
-  async def before_start(app, loop):
-    """Initialize database before server starts"""
-    try:
-      await init_db(app)
-    except Exception as e:
-      logger.error(f"[app.py] Failed to initialize database: {e}")
-      raise ServerError("[app.py] Database initialization failed")
-    
-  @app.after_server_stop
-  async def after_stop(app, loop):
-    """Cleanup database connections after server stops"""
-    try:
-      await close_db(app)
-    except Exception as e:
-      logger.error(f"[app.py] Failed to close database connections: {e}")
-      raise ServerError("[app.py] Database closing failed")
+  app.register_listener(init_db, "before_server_start")
 
-  @app.get("/")
+  app.register_listener(close_db, "after_server_stop")
+    
+  app.get("/")
   async def root(request: Request):
     return text("Hello World!")
 
