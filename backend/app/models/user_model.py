@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, func
 from sqlalchemy.ext.hybrid import hybrid_property
 
-from app.models.base import BaseModel
+from app.models.base_model import BaseModel
 
 class User(BaseModel):
   __tablename__ = 'users'

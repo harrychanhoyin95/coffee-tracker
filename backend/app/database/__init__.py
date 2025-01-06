@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from contextvars import ContextVar
 import os
 
-from app.models.base import Base
+from app.models.base_model import Base
 
 # Type variables for better type hints
 T = TypeVar('T')

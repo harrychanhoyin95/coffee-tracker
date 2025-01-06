@@ -1,4 +1,4 @@
-from sanic import Sanic, Request
+from sanic import Sanic
 from sanic.response import text
 from types import SimpleNamespace
 
