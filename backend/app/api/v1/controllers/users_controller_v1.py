@@ -2,6 +2,8 @@ from sanic import json, Request
 
 from app.services.user_service import UserService
 
+from app.utils.exceptions import NotFoundError
+
 class UserController:
   @staticmethod
   async def get_users(request: Request):
@@ -21,8 +23,9 @@ class UserController:
       user_id: int = int(user_id)
       user_service = UserService(request.ctx.session)
       user = await user_service.get_user_by_id(user_id)
-
       return json(user, status=200)
+    except NotFoundError as e:
+      return json({"error": str(e)}, status=404)
     except Exception as e:
       return json({"error": str(e)}, status=500)
 

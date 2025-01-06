@@ -4,6 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.models.user_model import User
 
+from app.utils.exceptions import NotFoundError
+
 class UserService:
   def __init__(self, session: AsyncSession):
     self._session = session
@@ -53,7 +55,7 @@ class UserService:
       user = result.scalar_one_or_none()
 
       if not user:
-        raise ValueError(f"User with ID {user_id} not found")
+        raise NotFoundError(f"User with ID {user_id} not found")
 
       return self._serialize_user(user) if user else None
 
