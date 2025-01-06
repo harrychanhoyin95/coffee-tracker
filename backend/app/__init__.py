@@ -1,5 +1,4 @@
 from sanic import Sanic
-from sanic.response import text
 from types import SimpleNamespace
 
 from app.database import init_db, close_db

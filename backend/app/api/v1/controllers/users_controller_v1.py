@@ -15,10 +15,10 @@ class UserController:
       return json({"error": str(e)}, status=500)
 
   @staticmethod
-  async def get_user_by_id(request: Request):
+  async def get_user_by_id(request: Request, user_id: str):
     """Handle GET request for a single user"""
     try:
-      user_id = request.json.get("user_id")
+      user_id: int = int(user_id)
       user_service = UserService(request.ctx.session)
       user = await user_service.get_user_by_id(user_id)
 
